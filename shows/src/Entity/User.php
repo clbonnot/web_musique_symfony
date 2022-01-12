@@ -258,4 +258,8 @@ class User implements UserInterface
     public function getUsername() { return $this->getEmail(); }
     public function getRoles() { return ['ROLE_USER']; }
     public function eraseCredentials() { }
+    public function __toString()
+{
+  return $this->email;
+}
 }
