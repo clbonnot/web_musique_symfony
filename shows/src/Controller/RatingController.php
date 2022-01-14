@@ -29,6 +29,8 @@ class RatingController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $rating = new Rating();
+        $rating->setDate(new \DateTime());
+        $rating->setUser($this->getUser());
         $form = $this->createForm(RatingType::class, $rating);
         $form->handleRequest($request);
 

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -36,8 +37,13 @@ class User implements UserInterface
     /**
      * @var string
      *
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      * @ORM\Column(name="email", type="string", length=128, nullable=false)
+     * 
      */
+     
     private $email;
 
     /**
@@ -259,7 +265,8 @@ class User implements UserInterface
     public function getRoles() { return ['ROLE_USER']; }
     public function eraseCredentials() { }
     public function __toString()
-{
-  return $this->email;
-}
+    {
+        return $this->email;
+    }
+
 }
