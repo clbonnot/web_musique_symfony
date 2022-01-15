@@ -349,6 +349,12 @@ class Series
     {
     return $this->getTitle();
     }
-    
+    /**
+     * @return this
+     */
+    public function getSeries(): Series
+    {
+        return $this;
+    }
 
 }
