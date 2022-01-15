@@ -4,39 +4,46 @@
 
 {% block body %}
     <h1>Series index</h1>
-
+    <form action:{{ path('series_index')}} method="get">
+        <input type="text" name="titre" placeholder="Titre" value="{{ titre }}"/>
+        <input type="date" name="An_Debut" placeholder="Année de début" value="{{ ADebut }}"/>
+        <input type="date" name="An_Fin" placeholder="Année de fin" value="{{ AFin }}"/>
+        <input type="number" name="Page" placeholder="Page" value="{{ page }}">
+        <input type="checkBox" id="TNote" name="triNote" value="notage">
+        <label for="TNote">Trie note</label>
+        <input type="submit" value="search"/>
+    </form>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <!--<th>Id</th>-->
                 <th>Title</th>
-                <th>Plot</th>
-                <th>Imdb</th>
+                <!--<th>Plot</th>
+                <th>Imdb</th>-->
                 <th>Poster</th>
-                <th>Director</th>
-                <th>YoutubeTrailer</th>
-                <th>Awards</th>
+                <!--<th>Director</th>-->
+                <!--<th>YoutubeTrailer</th>-->
+                <!--<th>Awards</th>
                 <th>YearStart</th>
-                <th>YearEnd</th>
+                <th>YearEnd</th>-->
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for series in series %}
-            <tr>
-                <td>{{ series.id }}</td>
-                <td>{{ series.title }}</td>
-                <td>{{ series.plot }}</td>
-                <td>{{ series.imdb }}</td>
-                <td>{{ series.poster }}</td>
-                <td>{{ series.director }}</td>
-                <td>{{ series.youtubeTrailer }}</td>
-                <td>{{ series.awards }}</td>
-                <td>{{ series.yearStart }}</td>
-                <td>{{ series.yearEnd }}</td>
+            <tr> 
+                <!--<td>{{ series.id }}</td>-->
+                <td>{{ series.getSeries().title }}</td>
+                <!--<td>{{ series.getSeries().plot }}</td>
+                <td>{{ series.getSeries().imdb }}</td>-->
+                <td><img src ="{{ path('series_poster_show', {'id': series.getSeries().id}) }}"/></td>
+                <!--<td>{{ series.getSeries().director }}</td>-->
+                <!--<td>{{ series.getSeries().youtubeTrailer }}</td>-->
+                <!--<td>{{ series.getSeries().awards }}</td>
+                <td>{{ series.getSeries().yearStart }}</td>
+                <td>{{ series.getSeries().yearEnd }}</td>-->
                 <td>
-                    <a href="{{ path('series_show', {'id': series.id}) }}">show</a>
-                    <a href="{{ path('series_edit', {'id': series.id}) }}">edit</a>
+                    <a href="{{ path('series_show', {'id': series.getSeries().id}) }}">show</a>
                 </td>
             </tr>
         {% else %}
@@ -47,5 +54,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('series_new') }}">Create new</a>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+% extends 'base.html.twig' %}
 
 {% block title %}Series{% endblock %}
 
@@ -7,10 +7,10 @@
 
     <table class="table">
         <tbody>
-            <tr>
+            <!--<tr>
                 <th>Id</th>
                 <td>{{ series.id }}</td>
-            </tr>
+            </tr>-->
             <tr>
                 <th>Title</th>
                 <td>{{ series.title }}</td>
@@ -21,17 +21,38 @@
             </tr>
             <tr>
                 <th>Imdb</th>
-                <td>{{ series.imdb }}</td>
+                <td><a href="https://www.imdb.com/title/{{ series.imdb }}">Vers IMDB</a>
+                </td>
             </tr>
-<th>Poster</th>
+            <tr>
+                <th>Poster</th>
                 <td><img src ="{{ path('series_poster_show', {'id': series.id}) }}"/></td>
+            </tr>
             <tr>
                 <th>Director</th>
                 <td>{{ series.director }}</td>
             </tr>
             <tr>
                 <th>YoutubeTrailer</th>
-                <td>{{ series.youtubeTrailer }}</td>
+                <td>
+                    {{ series.youtubeTrailer }}
+                    <iframe width="560" height="315" src="{{ path('series_trailer_show', {'id': series.id}) }}" frameborder="100" allowfullscreen>
+                    </iframe></td>
+            </tr>
+            <tr>
+                <th>Saison</th>
+                <td>
+                    {% for season in seasons %}
+                        <h4>Season {{ season.number }}</h4>
+                        {% for ep in episodes %}
+                            {% if ep.season.number == season.number %}
+                                <a href="https://www.imdb.com/title/{{ ep.imdb }}"><h6>{{ ep.id }} {{ ep.title }}</h6></a>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <h4> Pas de saison</h4>
+                    {% endfor %}
+                </td>
             </tr>
             <tr>
                 <th>Awards</th>
@@ -50,7 +71,6 @@
 
     <a href="{{ path('series_index') }}">back to list</a>
 
-    <a href="{{ path('series_edit', {'id': series.id}) }}">edit</a>
+    <a href="{{ path('series_poster_show', {'id': series.id}) }}">poster</a>
 
-    {{ include('series/_delete_form.html.twig') }}
 {% endblock %}
