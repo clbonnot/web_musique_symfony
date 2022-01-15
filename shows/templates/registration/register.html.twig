@@ -7,10 +7,16 @@
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
+        <br>    
          {{ form_row(registrationForm.name) }}
+         <br>
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
-        }) }}
+        }) 
+        }}
+        <br>
+        {{ form_row(registrationForm.captcha) }}
+        <br>
         {{ form_row(registrationForm.agreeTerms) }}
 
         <button type="submit" class="btn">Register</button>
