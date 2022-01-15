@@ -15,7 +15,7 @@ class RatingType extends AbstractType
             ->add('value')
             ->add('comment')
             //->add('date')
-            ->add('series')
+            //->add('series')
            // ->add('user')
         ;
     }

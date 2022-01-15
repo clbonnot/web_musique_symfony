@@ -34,6 +34,7 @@
             <tr> 
                 <!--<td>{{ series.id }}</td>-->
                 <td>{{ series.getSeries().title }}</td>
+                
                 <!--<td>{{ series.getSeries().plot }}</td>
                 <td>{{ series.getSeries().imdb }}</td>-->
                 <td><img src ="{{ path('series_poster_show', {'id': series.getSeries().id}) }}"/></td>
@@ -43,6 +44,10 @@
                 <td>{{ series.getSeries().yearStart }}</td>
                 <td>{{ series.getSeries().yearEnd }}</td>-->
                 <td>
+                {% if app.user %}
+                    <a href="{{ path('rating_new', {'id': series.getSeries().id}) }}">Laisser un avis</a>
+                    <br>
+                {% endif %}
                     <a href="{{ path('series_show', {'id': series.getSeries().id}) }}">show</a>
                 </td>
             </tr>

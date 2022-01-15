@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Rating;
+use App\Entity\Series;
 use App\Form\RatingType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,12 +26,15 @@ class RatingController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'rating_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/new/{id}', name: 'rating_new', methods: ['GET', 'POST'])]
+    public function new(Series $series, Request $request, EntityManagerInterface $entityManager): Response
     {
+      //  $id = $request->get('id');
+        
         $rating = new Rating();
         $rating->setDate(new \DateTime());
         $rating->setUser($this->getUser());
+        $rating->setSeries($series);
         $form = $this->createForm(RatingType::class, $rating);
         $form->handleRequest($request);
 

@@ -356,5 +356,9 @@ class Series
     {
         return $this;
     }
+    public static function getSerieId($id)
+    {
+      return self::$_serie[$id];
+    }
 
 }
